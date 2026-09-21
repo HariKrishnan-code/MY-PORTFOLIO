@@ -1,0 +1,60 @@
+/* ============================================================
+   DESIGN TOKENS (CSS VARIABLES)
+   ------------------------------------------------------------
+   Change the accent color / fonts here ONCE to re-skin the
+   entire site.
+   ============================================================ */
+:root {
+  /* ----- Accent color: Orange ----- */
+  --accent-50: #fff7ed;
+  --accent-100: #ffedd5;
+  --accent-200: #fed7aa;
+  --accent-300: #fdba74;
+  --accent-400: #fb923c;
+  --accent-500: #f97316;
+  --accent-600: #ea580c;
+  --accent-700: #c2410c;
+
+  /* ----- Secondary accent: Azure / Blue ----- */
+  --azure-400: #38bdf8;
+  --azure-500: #0ea5e9;
+  --azure-600: #0284c7;
+
+  /* ----- Neutral dark background ramp ----- */
+  --ink-700: #1e2740;
+  --ink-800: #141c2e;
+  --ink-850: #0f1524;
+  --ink-900: #0b0f1a;
+  --ink-950: #070a12;
+
+  /* ----- Text ----- */
+  --text-primary: #e6e9f0;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+
+  /* ----- Fonts (loaded in index.html) ----- */
+  --font-body: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Space Grotesk', 'Poppins', sans-serif;
+
+  /* ----- Spacing & radius ----- */
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+  /* Fluid section padding: scales from 3rem (small phones) up to 6rem (desktop) */
+  --section-pad-y: clamp(3rem, 4vw + 1.5rem, 6rem);
+
+  /* ----- Responsive breakpoints (reference only — @media queries below
+     use literal px values because CSS custom properties cannot be used
+     inside @media conditions). Kept here so the scale is documented in
+     one place. See RESPONSIVE-GUIDE.md for full details. -----
+     xs:  320px  (small phones, iPhone SE class)
+     sm:  480px  (large phones)
+     md:  768px  (tablets, iPad portrait)
+     lg:  1024px (small laptops, iPad landscape)
+     xl:  1200px (desktops)
+     2xl: 1400px (large / wide desktops, 1920x1080+) */
+
+  /* ----- Shadows / glows ----- */
+  --glow: 0 0 40px -10px rgba(249, 115, 22, 0.45);
+  --glow-sm: 0 0 24px -8px rgba(249, 115, 22, 0.35);
+  --card-shadow: 0 8px 30px -12px rgba(0, 0, 0, 0.6);
+}

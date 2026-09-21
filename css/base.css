@@ -1,0 +1,97 @@
+/* ============================================================
+   BASE / RESET
+   ------------------------------------------------------------
+   Global element styles, smooth scroll, scrollbar, typography.
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Explicit 100% keeps 1rem == 16px (WCAG minimum readable body size)
+     and respects the user's browser/OS font-size setting for accessibility. */
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--ink-950);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem; /* 16px baseline on every device */
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Safety net: real overflow sources (fixed-width elements) are fixed
+     at the source in sections.css, but this guards against any stray
+     absolutely-positioned decoration causing a horizontal scrollbar. */
+  overflow-x: hidden;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--ink-900); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-500), var(--accent-600));
+  border-radius: 999px;
+}
+
+/* ===== Layout helpers ===== */
+/* Mobile-first fluid container. Base = smallest phones (320px+). */
+.container-x {
+  max-width: 80rem; /* 1280px — desktop content width */
+  margin-inline: auto;
+  width: 100%;
+  padding-inline: 1rem; /* 16px gutter on 320–479px phones */
+}
+@media (min-width: 480px)  { .container-x { padding-inline: 1.25rem; } }
+@media (min-width: 640px)  { .container-x { padding-inline: 2rem; } }
+@media (min-width: 1024px) { .container-x { padding-inline: 3rem; } }
+@media (min-width: 1400px) {
+  /* Large/wide desktops (1920x1080 and above): give the layout a bit
+     more breathing room instead of leaving a huge fixed-width column
+     centered in a sea of empty space. */
+  .container-x { max-width: 90rem; padding-inline: 4rem; }
+}
+
+.section-pad { padding-block: var(--section-pad-y); }
+
+/* ===== Touch-friendly baseline =====
+   Any element meant to be tapped gets at least a 44x44px hit area,
+   per WCAG 2.5.5 / Apple & Material touch-target guidance. */
+.btn,
+.nav-mobile button {
+  min-height: 44px;
+}
+.nav-toggle,
+.footer-social {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.text-gradient {
+  background: linear-gradient(to right, var(--accent-400), var(--accent-600));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
