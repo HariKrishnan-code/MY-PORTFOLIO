@@ -9,6 +9,7 @@
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function () {
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- Footer year ----------
   var yearEl = document.getElementById('footer-year');
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // ---------- Smooth scroll for any [data-scroll] element ----------
   function scrollToId(id) {
     var el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el) el.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   }
   document.addEventListener('click', function (e) {
     var trigger = e.target.closest('[data-scroll]');
@@ -35,9 +36,18 @@ document.addEventListener('DOMContentLoaded', function () {
   var icon = document.getElementById('nav-icon');
 
   function closeMobileNav() {
-    if (mobile) { mobile.classList.remove('open'); mobile.setAttribute('aria-hidden', 'true'); }
+    var focusWasInMenu = mobile && mobile.contains(document.activeElement);
+    if (mobile) {
+      mobile.classList.remove('open');
+      mobile.setAttribute('aria-hidden', 'true');
+      mobile.inert = true;
+    }
     if (icon) icon.className = 'fa-solid fa-bars';
-    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open navigation menu');
+      if (focusWasInMenu) toggle.focus();
+    }
   }
 
   if (toggle && mobile && icon) {
@@ -45,7 +55,9 @@ document.addEventListener('DOMContentLoaded', function () {
       var open = mobile.classList.toggle('open');
       icon.className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
       mobile.setAttribute('aria-hidden', open ? 'false' : 'true');
+      mobile.inert = !open;
     });
 
     // Close on outside click / Escape (nicer touch UX, avoids a stuck-open menu)
@@ -73,6 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!el) return;
 
     var phrases = ['Cloud & DevOps Engineer', 'Cloud Enthusiast', 'DevOps Learner', 'CSE Student'];
+    if (prefersReducedMotion) {
+      el.textContent = phrases[0];
+      return;
+    }
     var phraseIndex = 0;
     var charIndex = 0;
     var deleting = false;
@@ -115,6 +131,11 @@ document.addEventListener('DOMContentLoaded', function () {
         var el = entry.target;
         var target = parseInt(el.dataset.count, 10);
         var suffix = el.dataset.suffix || '';
+        if (prefersReducedMotion) {
+          el.textContent = target + suffix;
+          observer.unobserve(el);
+          return;
+        }
         var duration = 1600;
         var start = performance.now();
 

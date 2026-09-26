@@ -5,15 +5,15 @@ stay consistent. Read this before changing layout, type, or images.
 
 ## 1. What was broken before this pass
 
-| Issue | Where | Fix |
-|---|---|---|
-| Hero portrait card was a **hard-coded 430px** box | `.hero-photo-card` | `width: min(430px, 100%)` — shrinks below 430px, never overflows |
-| Hero photo itself was a **fixed 430×560px**, then jumped to a fixed 26rem square at 640px | `.hero-photo-card img` | `width:100%; height:auto; aspect-ratio: 3/4;` — one consistent shape at every size |
-| Hero name/role/intro used **raw `px` font-sizes** that overrode an existing `clamp()` | `.hero-name`, `.hero-role`, `.hero-intro` | Real fluid type with `clamp(min, preferred, max)` |
-| Two **conflicting media queries** for the hero grid (`max-width:1100px` stacked, `min-width:1024px` 2-column) fought each other between 1024–1100px | `.hero-grid-layout` | One mobile-first breakpoint at `1024px` |
-| Hamburger button (`.nav-toggle`) had no guaranteed hit area | navbar | `min-height/min-width: 44px` + flex-centered icon |
-| No `srcset`/`loading` on any `<img>` | whole page | Real responsive image sets + `loading="lazy"` below the fold |
-| `overflow-x: hidden` on `<body>` was hiding overflow bugs instead of fixing them | `base.css` | Kept as a safety net, but the actual sources (above) were fixed |
+| Issue                                                                                                                                               | Where                                     | Fix                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------- |
+| Hero portrait card was a **hard-coded 430px** box                                                                                                   | `.hero-photo-card`                        | `width: min(430px, 100%)` — shrinks below 430px, never overflows                   |
+| Hero photo itself was a **fixed 430×560px**, then jumped to a fixed 26rem square at 640px                                                           | `.hero-photo-card img`                    | `width:100%; height:auto; aspect-ratio: 3/4;` — one consistent shape at every size |
+| Hero name/role/intro used **raw `px` font-sizes** that overrode an existing `clamp()`                                                               | `.hero-name`, `.hero-role`, `.hero-intro` | Real fluid type with `clamp(min, preferred, max)`                                  |
+| Two **conflicting media queries** for the hero grid (`max-width:1100px` stacked, `min-width:1024px` 2-column) fought each other between 1024–1100px | `.hero-grid-layout`                       | One mobile-first breakpoint at `1024px`                                            |
+| Hamburger button (`.nav-toggle`) had no guaranteed hit area                                                                                         | navbar                                    | `min-height/min-width: 44px` + flex-centered icon                                  |
+| No `srcset`/`loading` on any `<img>`                                                                                                                | whole page                                | Real responsive image sets + `loading="lazy"` below the fold                       |
+| Body-level horizontal clipping masked width issues                                                                                                  | `base.css`                                | Removed after fixing Contact, project-card, Beyond-grid, and reveal sources        |
 
 ## 2. Breakpoint scale
 
@@ -25,16 +25,18 @@ queries layer on enhancements as the viewport grows. There's no
 320px   xs   Small phones (iPhone SE)
 480px   sm   Large phones
 640px   —    (legacy step already used across sections.css/components.css)
-768px   md   Tablets (iPad portrait), also used as a nav-grid step
-1024px  lg   Small laptops, iPad landscape — desktop nav & multi-column layouts kick in here
+768px   md   Tablets (iPad portrait)
+1024px  lg   Small laptops, iPad landscape — hero and content columns kick in here
 1200px  xl   Desktops
+1280px  nav  Full horizontal navigation fits without clipping
 1400px  2xl  Large/wide desktops (1920×1080 and above) — container widens to 90rem
 ```
 
 Most component grids (`.skills-grid`, `.cert-grid`, `.about-grid`, etc.)
 already followed this mobile-first pattern (1 column → 2 → 3/4 at
-640/768/1024px) and didn't need changes — only the hero section and a
-handful of touch targets had the fixed-px bugs listed above.
+640/768/1024px). Responsive checks also exposed content-based minimum
+widths in the project and Beyond grids, plus long Contact text; those
+specific narrow-screen cases are corrected above.
 
 ## 3. Fluid typography
 
@@ -43,7 +45,11 @@ fixed sizes at each breakpoint, we use `clamp(min, preferred, max)`:
 
 ```css
 .hero-name {
-  font-size: clamp(2.25rem, 1.55rem + 4vw, 4.5rem); /* 36px on a 375px phone → 72px on a 1440px+ desktop */
+  font-size: clamp(
+    2.25rem,
+    1.55rem + 4vw,
+    4.5rem
+  ); /* 36px on a 375px phone → 72px on a 1440px+ desktop */
 }
 ```
 
@@ -71,30 +77,27 @@ labels, not primary reading text, which is normal practice.
 
 ## 5. Images
 
-Local images (hero photo + 4 certificates) now ship as three or four
-pre-resized JPEGs under `images/responsive/` (480w / 800w / 1200w /
-full-size, quality 78–80), wired up with `srcset` + `sizes` so the
-browser downloads the smallest file that still looks sharp at its
-actual rendered size — instead of a phone downloading the same
-1600px-wide certificate photo as a 1920px desktop.
+The hero photo and four certificates use their original JPEG files
+directly from `images/`; the generated `images/responsive/` variants
+are not required. CSS still scales and crops the images responsively,
+and each image keeps width and height attributes matching its original
+dimensions. The local originals are approximately 90–156 KB each.
 
 - **Hero photo** (`hari passport image.jpeg`): loads eagerly with
   `fetchpriority="high"` because it's the largest above-the-fold
-  element (the LCP candidate) — it should *not* be lazy-loaded.
+  element (the LCP candidate) — it should _not_ be lazy-loaded.
 - **Certificate photos** and the **project screenshot**: `loading="lazy"`
   — they're below the fold, so the browser defers fetching them until
   the user is about to scroll to them.
-- The remote Pexels project screenshot uses Pexels' own `?w=` resize
-  parameter to build a 3-step `srcset` (600/900/1200) without needing a
-  local copy.
+- The remote Pexels project screenshot retains its own 3-step `srcset`
+  (600/900/1200); it does not depend on local generated image files.
 - Every `<img>` has explicit `width`/`height` attributes (the image's
   real intrinsic pixel size) so the browser can reserve the correct
   aspect ratio before the image or CSS finishes loading — this
   prevents layout shift (CLS) as the page renders.
 
-If you swap in a new photo, regenerate the responsive set the same way
-(three widths + the original, JPEG quality ~80) and update the
-`srcset` list.
+Using originals means mobile and desktop download the same local image
+file, but the current originals are small and the layout remains fluid.
 
 ## 6. Touch targets
 
@@ -106,23 +109,23 @@ existing padding-based sizing — it just raises the floor.
 
 ## 7. Navigation
 
-- Below `1024px`: hamburger menu (`.nav-toggle`) shows a full-width
+- Below `1280px`: hamburger menu (`.nav-toggle`) shows a full-width
   dropdown (`.nav-mobile`) with an animated max-height/opacity
   transition.
 - The hamburger button now syncs `aria-expanded` / `aria-hidden` with
   its open state, closes on outside click, closes on <kbd>Esc</kbd>,
   and auto-closes if the window is resized/rotated past the desktop
   breakpoint while open (`js/script.js`).
-- At `1024px`+: the full horizontal nav + CTA button show, hamburger is
+- At `1280px`+: the full horizontal nav + CTA button show, hamburger is
   hidden.
+- The closed menu is inert and cannot receive keyboard focus.
 
-## 8. Verified against
+## 8. Verification notes
 
-- Desktop: 1920×1080, 1440×900, 1366×768
-- Tablet: 768–1024px (portrait & landscape)
-- Mobile: 375px (iPhone SE/14), 360–412px (Android), down to 320px
-- No horizontal scrollbar at any of the widths above (the hero card was
-  the only real offender — see section 1).
+- Responsive layout and interactions were checked in the integrated
+  browser at widths from 320px through 2560px.
+- Chrome, Firefox, Safari, and Edge were not physically tested in this audit.
+- Refer to the final browser test report for this audit's exact coverage.
 - `<meta name="viewport" content="width=device-width, initial-scale=1.0">`
   was already correct and needed no change — it doesn't block pinch-zoom
   (no `maximum-scale`/`user-scalable=no`), which matters for

@@ -69,13 +69,13 @@
         <button class="nav-cta" data-scroll="contact">Let's Talk</button>
 
         <!-- Mobile hamburger -->
-        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-mobile">
-          <i class="fa-solid fa-bars" id="nav-icon"></i>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-mobile">
+          <i class="fa-solid fa-bars" id="nav-icon" aria-hidden="true"></i>
         </button>
       </nav>
 
       <!-- Mobile dropdown -->
-      <div class="nav-mobile container-x" id="nav-mobile" aria-hidden="true">
+      <div class="nav-mobile container-x" id="nav-mobile" aria-hidden="true" inert>
         <ul style="padding-bottom:1.5rem;padding-top:0.5rem">
           <li><button data-scroll="hero" data-nav="hero">Home</button></li>
           <li><button data-scroll="about" data-nav="about">About</button></li>
@@ -118,7 +118,7 @@
               Computer Science Engineering student passionate about cloud computing, automation, and building scalable, reliable infrastructure. I turn infrastructure problems into clean, repeatable pipelines, automate deployments with modern CI/CD, and build resilient systems that help teams move faster and safer.
             </p>
             <div class="hero-btns reveal reveal-d-3">
-              <a class="btn btn-primary" href="Harikrishnan_K full.doc" download>
+              <a class="btn btn-primary" href="Harikrishnan_K full.doc" download="Harikrishnan-K-Resume.doc">
                 <i class="fa-solid fa-download"></i> Download Resume
               </a>
               <button class="btn btn-ghost" data-scroll="contact">
@@ -134,13 +134,7 @@
               <div class="glass">
                 <img
                   class="zoom-img"
-                  src="images/responsive/hero-photo-800w.jpg"
-                  srcset="
-                    images/responsive/hero-photo-480w.jpg 480w,
-                    images/responsive/hero-photo-800w.jpg 800w,
-                    images/responsive/hero-photo-1200w.jpg 1200w,
-                    images/responsive/hero-photo-1254w.jpg 1254w"
-                  sizes="(min-width: 1024px) 430px, (min-width: 480px) 60vw, 90vw"
+                  src="images/hari passport image.jpeg"
                   width="1254"
                   height="1254"
                   alt="Harikrishnan K"
@@ -913,12 +907,7 @@
                 <div class="cert-img-wrap">
                   <img
                     class="zoom-img cert-img"
-                    src="images/responsive/cert-fullstack-800w.jpg"
-                    srcset="
-                      images/responsive/cert-fullstack-480w.jpg 480w,
-                      images/responsive/cert-fullstack-800w.jpg 800w,
-                      images/responsive/cert-fullstack-1139w.jpg 1139w"
-                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                    src="images/full stack certificate.jpeg"
                     width="1139"
                     height="1600"
                     alt="Full Stack Developer"
@@ -940,13 +929,7 @@
                 <div class="cert-img-wrap">
                   <img
                     class="zoom-img cert-img"
-                    src="images/responsive/cert-javascript-800w.jpg"
-                    srcset="
-                      images/responsive/cert-javascript-480w.jpg 480w,
-                      images/responsive/cert-javascript-800w.jpg 800w,
-                      images/responsive/cert-javascript-1200w.jpg 1200w,
-                      images/responsive/cert-javascript-1600w.jpg 1600w"
-                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                    src="images/java srcipt certificate.jpeg"
                     width="1600"
                     height="1168"
                     alt="JavaScript Programming"
@@ -968,12 +951,7 @@
                 <div class="cert-img-wrap">
                   <img
                     class="zoom-img cert-img"
-                    src="images/responsive/cert-flutter-800w.jpg"
-                    srcset="
-                      images/responsive/cert-flutter-480w.jpg 480w,
-                      images/responsive/cert-flutter-800w.jpg 800w,
-                      images/responsive/cert-flutter-1137w.jpg 1137w"
-                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                    src="images/flutter certificate.jpeg"
                     width="1137"
                     height="1600"
                     alt="Flutter Development"
@@ -995,13 +973,7 @@
                 <div class="cert-img-wrap">
                   <img
                     class="zoom-img cert-img"
-                    src="images/responsive/cert-dataanalytics-800w.jpg"
-                    srcset="
-                      images/responsive/cert-dataanalytics-480w.jpg 480w,
-                      images/responsive/cert-dataanalytics-800w.jpg 800w,
-                      images/responsive/cert-dataanalytics-1200w.jpg 1200w,
-                      images/responsive/cert-dataanalytics-1599w.jpg 1599w"
-                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+                    src="images/data analtics certifiacte.jpeg"
                     width="1599"
                     height="1131"
                     alt="SQL & Databases"
@@ -1163,7 +1135,7 @@
                 <p>Reach out through any channel below — I usually respond within a day.</p>
                 <ul class="contact-list">
                   <li>
-                    <a href="mailto:harisiva.connect@gmail.com" target="_blank" rel="noreferrer" class="contact-item">
+                    <a href="mailto:harisiva.connect@gmail.com" class="contact-item">
                       <div class="contact-icon-box"><i class="fa-solid fa-envelope"></i></div>
                       <div>
                         <p class="contact-label">Email</p>
@@ -1173,7 +1145,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="tel:+91 9942820053" target="_blank" rel="noreferrer" class="contact-item">
+                    <a href="tel:+919942820053" class="contact-item">
                       <div class="contact-icon-box"><i class="fa-solid fa-phone"></i></div>
                       <div>
                         <p class="contact-label">Phone</p>
@@ -1224,14 +1196,14 @@
                   <a class="btn btn-primary" href="mailto:harisiva.connect@gmail.com">
                     <i class="fa-solid fa-envelope"></i> Send an Email
                   </a>
-                  <a class="btn btn-ghost" href="Harikrishnan_K full.doc" download>
+                  <a class="btn btn-ghost" href="Harikrishnan_K full.doc" download="Harikrishnan-K-Resume.doc">
                     <i class="fa-solid fa-download"></i> Download Resume
                   </a>
                 </div>
                  <!-- socials -->
-        <div class="footer-socials" style=" margin-left: 20px; margin-top: 50px;">
+        <div class="footer-socials contact-socials">
 
-          <a class="footer-social" href="mailto:harisiva.connect@gmail.com" target="_blank" rel="noreferrer" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+          <a class="footer-social" href="mailto:harisiva.connect@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
           <a class="footer-social" href="https://www.linkedin.com/in/harikrishnan-hs" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
           <a class="footer-social" href="https://github.com/HariKrishnan-code" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
           <a class="footer-social" href="https://www.instagram.com/_smart_hari___/" target="_blank" rel="noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>

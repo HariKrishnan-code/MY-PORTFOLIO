@@ -25,10 +25,6 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* Safety net: real overflow sources (fixed-width elements) are fixed
-     at the source in sections.css, but this guards against any stray
-     absolutely-positioned decoration causing a horizontal scrollbar. */
-  overflow-x: hidden;
   width: 100%;
 }
 
