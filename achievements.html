@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Verified achievements, credentials, and project evidence for Harikrishnan K." />
+    <title>Achievements | Harikrishnan K</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/sections.css" />
+    <style>
+      .achievement-page { min-height: 100vh; overflow-x: clip; background: radial-gradient(circle at 10% 0%, rgba(249,115,22,.14), transparent 28rem), radial-gradient(circle at 90% 14%, rgba(14,165,233,.13), transparent 25rem), var(--ink-950); }
+      .achievement-nav { position: sticky; top: 0; z-index: 10; border-bottom: 1px solid rgba(255,255,255,.1); background: rgba(7,10,18,.86); backdrop-filter: blur(18px); }
+      .achievement-nav-inner { min-height: 4.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+      .achievement-brand { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: #fff; }
+      .achievement-back { display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; color: var(--text-secondary); font-size: .875rem; font-weight: 600; }
+      .achievement-back:hover { color: var(--accent-300); }
+      .achievement-hero { padding: clamp(4rem, 8vw, 7rem) 0 3rem; text-align: center; }
+      .achievement-hero h1 { max-width: 52rem; margin: 1rem auto 0; color: #fff; font-size: clamp(2.35rem, 6vw, 4.75rem); line-height: 1.02; letter-spacing: -.045em; }
+      .achievement-hero p { max-width: 43rem; margin: 1.4rem auto 0; color: var(--text-secondary); font-size: 1.05rem; line-height: 1.75; }
+      .achievement-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; max-width: 40rem; margin: 2.5rem auto 0; }
+      .achievement-stat { padding: 1rem; text-align: left; }
+      .achievement-stat strong { display: block; font-family: var(--font-heading); color: #fff; font-size: 1.35rem; }
+      .achievement-stat span { font-size: .76rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; }
+      .achievement-section { padding: 3rem 0 clamp(4rem, 8vw, 7rem); }
+      .achievement-section-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 1rem; margin-bottom: 1.75rem; }
+      .achievement-section-head h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.3rem); }
+      .achievement-section-head p { max-width: 38rem; color: var(--text-secondary); font-size: .92rem; line-height: 1.65; }
+      .achievement-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+      .persona-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; align-items: center; }
+      @media (min-width: 640px) { .achievement-stats { grid-template-columns: repeat(4, 1fr); } .achievement-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (min-width: 768px) { .persona-grid { grid-template-columns: 0.9fr 1.1fr; } }
+      @media (min-width: 1024px) { .achievement-grid { grid-template-columns: repeat(4, 1fr); } }
+      .persona-card { display: flex; flex-direction: column; gap: 1.2rem; padding: 1.25rem; }
+      .persona-card img { width: 100%; border-radius: 1.25rem; object-fit: cover; aspect-ratio: 4 / 4.5; }
+      .persona-card h2 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.1; }
+      .persona-card p { color: var(--text-secondary); font-size: .95rem; line-height: 1.75; }
+      .persona-list { display: grid; gap: .7rem; padding: 0; margin: 0; list-style: none; color: #dbeafe; font-size: .88rem; }
+      .persona-list li { display: flex; align-items: center; gap: .7rem; }
+      .persona-list i { color: var(--accent-400); }
+      .achievement-card { display: flex; flex-direction: column; overflow: hidden; padding: 0; text-align: left; }
+      .achievement-card-image { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 3; background: var(--ink-800); }
+      .achievement-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.22,1,.36,1); }
+      .achievement-card:hover .achievement-card-image img { transform: scale(1.06); }
+      .achievement-view { position: absolute; right: .75rem; bottom: .75rem; display: inline-flex; width: 2.6rem; height: 2.6rem; align-items: center; justify-content: center; border-radius: 50%; color: #fff; background: rgba(7,10,18,.76); backdrop-filter: blur(10px); }
+      .achievement-card-body { display: flex; flex: 1; flex-direction: column; padding: 1.25rem; }
+      .achievement-type { color: var(--accent-300); font-size: .7rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+      .achievement-card h3 { margin-top: .45rem; color: #fff; font-size: 1.08rem; }
+      .achievement-card p { margin-top: .4rem; color: var(--text-secondary); font-size: .82rem; }
+      .achievement-proof { display: inline-flex; align-items: center; gap: .4rem; margin-top: auto; padding-top: 1.15rem; color: var(--accent-400); font-size: .8rem; font-weight: 600; }
+      .video-proof { border: 1px dashed rgba(56,189,248,.38); background: linear-gradient(135deg, rgba(14,165,233,.09), rgba(249,115,22,.05)); padding: clamp(1.5rem, 4vw, 2.5rem); }
+      .video-proof-grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+      @media (min-width: 768px) { .video-proof-grid { grid-template-columns: 1.1fr .9fr; align-items: center; } }
+      .video-frame { border-radius: 1.2rem; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: rgba(2,6,23,.9); }
+      .video-frame video { display: block; width: 100%; aspect-ratio: 16 / 10; background: #020817; }
+      .video-icon { display: flex; align-items: center; justify-content: center; width: 3.5rem; height: 3.5rem; border-radius: 1rem; background: rgba(14,165,233,.15); color: var(--azure-400); font-size: 1.35rem; }
+      .video-proof h3 { margin-top: 1rem; color: #fff; font-size: 1.3rem; }
+      .video-proof p { margin-top: .65rem; color: var(--text-secondary); font-size: .9rem; line-height: 1.7; }
+      .video-checklist { display: grid; gap: .65rem; color: #cbd5e1; font-size: .85rem; }
+      .video-checklist li { display: flex; gap: .65rem; align-items: flex-start; }
+      .video-checklist i { margin-top: .2rem; color: var(--azure-400); }
+      .achievement-footer { border-top: 1px solid rgba(255,255,255,.1); padding: 2rem 0; color: var(--text-muted); font-size: .8rem; text-align: center; }
+      .image-dialog { width: min(92vw, 68rem); max-height: 92vh; padding: 0; border: 1px solid rgba(255,255,255,.16); border-radius: 1.25rem; background: var(--ink-900); color: #fff; overflow: hidden; }
+      .image-dialog::backdrop { background: rgba(0,0,0,.78); backdrop-filter: blur(5px); }
+      .image-dialog img { display: block; width: 100%; max-height: 82vh; object-fit: contain; background: var(--ink-950); }
+      .dialog-close { position: absolute; top: .75rem; right: .75rem; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: rgba(7,10,18,.8); color: #fff; font-size: 1rem; }
+      .dialog-caption { padding: .9rem 1.1rem; color: var(--text-secondary); font-size: .85rem; }
+    </style>
+  </head>
+  <body class="achievement-page">
+    <header class="achievement-nav">
+      <div class="container-x achievement-nav-inner">
+        <a class="achievement-brand" href="index.html"><span class="text-gradient">HK</span><span style="color:#94a3b8">.dev</span></a>
+        <a class="achievement-back" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to portfolio</a>
+      </div>
+    </header>
+    <main>
+      <section class="achievement-hero">
+        <div class="container-x">
+          <span class="section-eyebrow"><span class="dot"></span>Portfolio spotlight</span>
+          <h1>My story, milestones, and <span class="text-gradient">proof of growth.</span></h1>
+          <p>I’m Harikrishnan K — a Computer Science student building toward cloud, DevOps, and full-stack engineering. This page brings together my persona, key achievements, and work evidence in one place.</p>
+          <div class="achievement-stats" aria-label="Achievement overview">
+            <div class="achievement-stat glass"><strong>3+</strong><span>Focus areas</span></div>
+            <div class="achievement-stat glass"><strong>2025</strong><span>Active growth</span></div>
+            <div class="achievement-stat glass"><strong>4</strong><span>Achievements</span></div>
+            <div class="achievement-stat glass"><strong>1</strong><span>Story page</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="achievement-section" style="padding-top:0;">
+        <div class="container-x persona-grid">
+          <div class="persona-card glass glass-hover lift">
+            <img src="images/hari passport image.jpeg" alt="Harikrishnan K portrait" loading="lazy" />
+          </div>
+          <div class="persona-card glass glass-hover lift">
+            <div>
+              <span class="section-eyebrow"><span class="dot"></span>Who I am</span>
+              <h2>A learner who turns curiosity into real systems.</h2>
+            </div>
+            <p>I enjoy learning by building. From cloud infrastructure and automation to frontend development and analytics, I keep moving toward practical skills that solve actual problems and improve how teams deliver software.</p>
+            <ul class="persona-list">
+              <li><i class="fa-solid fa-circle-check"></i> Cloud and DevOps learning with a focus on reliability and automation.</li>
+              <li><i class="fa-solid fa-circle-check"></i> Full-stack development and problem solving through hands-on projects.</li>
+              <li><i class="fa-solid fa-circle-check"></i> Passion for continuous learning, structured thinking, and technical growth.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="achievement-section">
+        <div class="container-x">
+          <div class="achievement-section-head">
+            <div><span class="section-eyebrow"><span class="dot"></span>Achievement images</span><h2 style="margin-top:1rem">Milestones I’m proud of</h2></div>
+            <p>These images reflect the learning path, skill-building, and practical progress I have made across development, mobile apps, and data work.</p>
+          </div>
+          <div id="achievementGrid" class="achievement-grid"></div>
+        </div>
+      </section>
+
+      <section class="achievement-section" style="padding-top:0;">
+        <div class="container-x">
+          <div class="achievement-section-head">
+            <div><span class="section-eyebrow"><span class="dot"></span>Video proof</span><h2 style="margin-top:1rem">Profile and project video showcase</h2></div>
+            <p>This section is designed for a short personal introduction or project walkthrough so recruiters can see both my persona and my work in action.</p>
+          </div>
+          <div id="videoShowcase" class="video-proof-grid"></div>
+        </div>
+      </section>
+    </main>
+    <footer class="achievement-footer"><div class="container-x">© <span id="year"></span> Harikrishnan K · Achievement portfolio</div></footer>
+    <dialog class="image-dialog" id="image-dialog" aria-label="Certificate preview"><button class="dialog-close" type="button" aria-label="Close preview"><i class="fa-solid fa-xmark"></i></button><img id="dialog-image" alt="" /><p class="dialog-caption" id="dialog-caption"></p></dialog>
+    <script>
+      const achievements = [
+        {
+          title: 'Full Stack Developer',
+          type: 'Professional growth · 2025',
+          description: 'Built confidence in end-to-end application development and project execution.',
+          image: 'images/full stack certificate.jpeg',
+          alt: 'Full Stack Developer achievement from AXN INFOTECH'
+        },
+        {
+          title: 'JavaScript Programming',
+          type: 'Programming · 2025',
+          description: 'Strengthened my frontend logic, interaction design, and scripting capabilities.',
+          image: 'images/java srcipt certificate.jpeg',
+          alt: 'JavaScript Programming achievement from Simplilearn SkillUp'
+        },
+        {
+          title: 'Flutter Development',
+          type: 'Mobile development · 2025',
+          description: 'Expanded my ability to design and build efficient cross-platform mobile apps.',
+          image: 'images/flutter certificate.jpeg',
+          alt: 'Flutter Development achievement from VELGA Powerhouse'
+        },
+        {
+          title: 'SQL & Data Analysis',
+          type: 'Data · 2025',
+          description: 'Developed analytical thinking for interpreting patterns and making sense of data.',
+          image: 'images/data analtics certifiacte.jpeg',
+          alt: 'SQL and Data Analysis achievement from DIGITROVERTS'
+        }
+      ];
+
+      const videos = [
+        {
+          title: 'My work, explained in motion.',
+          text: 'This space can hold a personal introduction video, project walkthrough, or short demo reel. It gives the achievements page a human face and makes the portfolio feel more complete.',
+          src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
+          poster: 'images/me.jpeg'
+        }
+      ];
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      const achievementGrid = document.getElementById('achievementGrid');
+      const videoShowcase = document.getElementById('videoShowcase');
+
+      achievementGrid.innerHTML = achievements.map((item) => `
+        <article class="achievement-card glass glass-hover lift">
+          <a class="achievement-card-image" href="${item.image}" data-certificate data-title="${item.title}">
+            <img src="${item.image}" alt="${item.alt}" loading="lazy" />
+            <span class="achievement-view" aria-hidden="true"><i class="fa-solid fa-expand"></i></span>
+          </a>
+          <div class="achievement-card-body">
+            <span class="achievement-type">${item.type}</span>
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <a class="achievement-proof" href="${item.image}" target="_blank" rel="noopener">View achievement <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+      `).join('');
+
+      videoShowcase.innerHTML = `
+        <div class="video-proof glass">
+          <div class="video-proof-grid">
+            <div class="video-frame">
+              <video controls preload="metadata" poster="${videos[0].poster}" aria-label="Achievement video preview">
+                <source src="${videos[0].src}" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div>
+              <div class="video-icon"><i class="fa-solid fa-video"></i></div>
+              <h3>${videos[0].title}</h3>
+              <p>${videos[0].text}</p>
+              <ul class="video-checklist">
+                <li><i class="fa-solid fa-circle-check"></i><span>Use a short intro showing your personality and technical focus.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i><span>Highlight one project, lesson learned, and result you achieved.</span></li>
+                <li><i class="fa-solid fa-circle-check"></i><span>Keep it between 45–90 seconds to stay engaging and professional.</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const dialog = document.getElementById('image-dialog');
+      const dialogImage = document.getElementById('dialog-image');
+      const dialogCaption = document.getElementById('dialog-caption');
+
+      document.querySelectorAll('[data-certificate]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          dialogImage.src = link.href;
+          dialogImage.alt = link.querySelector('img').alt;
+          dialogCaption.textContent = link.dataset.title;
+          dialog.showModal();
+        });
+      });
+
+      document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    </script>
+  </body>
+</html>
